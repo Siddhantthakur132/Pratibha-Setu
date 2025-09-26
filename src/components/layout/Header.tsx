@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/enhanced-button"
 import { Menu, X, Activity, Users, Settings } from "lucide-react"
+import { Link, useLocation } from "react-router-dom"
 
 interface HeaderProps {
   userRole?: 'athlete' | 'coach' | 'admin' | null
@@ -8,6 +9,7 @@ interface HeaderProps {
 
 export function Header({ userRole }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const location = useLocation()
 
   const getRoleIcon = () => {
     switch (userRole) {
@@ -33,17 +35,26 @@ export function Header({ userRole }: HeaderProps) {
         <div className="flex items-center justify-between h-16">
           {/* Logo & Title */}
           <div className="flex items-center space-x-3">
-            <div className="bg-gradient-to-r from-primary to-primary-glow p-2 rounded-lg">
-              <Activity className="h-6 w-6 text-white" />
-            </div>
-            <div>
-              <h1 className="text-xl font-bold text-foreground">TalentAI</h1>
-              <p className="text-xs text-muted-foreground">{getRoleLabel()}</p>
-            </div>
+            <Link to="/" className="flex items-center space-x-3">
+              <div className="bg-gradient-to-r from-primary to-primary-glow p-2 rounded-lg">
+                <Activity className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <h1 className="text-xl font-bold text-foreground">TalentAI</h1>
+                <p className="text-xs text-muted-foreground">{getRoleLabel()}</p>
+              </div>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
+            {!userRole && (
+              <>
+                <Link to="/athlete" className="text-foreground hover:text-primary transition-colors">Athlete</Link>
+                <Link to="/coach" className="text-foreground hover:text-primary transition-colors">Coach</Link>
+                <Link to="/admin" className="text-foreground hover:text-primary transition-colors">Admin</Link>
+              </>
+            )}
             {userRole === 'athlete' && (
               <>
                 <a href="#dashboard" className="text-foreground hover:text-primary transition-colors">Dashboard</a>
@@ -81,14 +92,22 @@ export function Header({ userRole }: HeaderProps) {
             
             {!userRole ? (
               <div className="flex items-center space-x-2">
-                <Button variant="outline" size="sm">Login</Button>
-                <Button variant="hero" size="sm">Get Started</Button>
+                <Button variant="outline" size="sm" asChild>
+                  <Link to="/">Home</Link>
+                </Button>
+                <Button variant="hero" size="sm" asChild>
+                  <Link to="/athlete">Get Started</Link>
+                </Button>
               </div>
             ) : (
-              <Button variant="outline" size="sm">
-                <Settings className="h-4 w-4 mr-2" />
-                Settings
-              </Button>
+              <div className="flex items-center space-x-3">
+                <Button variant="outline" size="sm" asChild>
+                  <Link to="/">
+                    <Settings className="h-4 w-4 mr-2" />
+                    Home
+                  </Link>
+                </Button>
+              </div>
             )}
 
             {/* Mobile Menu Button */}
@@ -107,6 +126,13 @@ export function Header({ userRole }: HeaderProps) {
         {isMenuOpen && (
           <div className="md:hidden border-t border-border">
             <nav className="flex flex-col space-y-2 py-4">
+              {!userRole && (
+                <>
+                  <Link to="/athlete" className="px-3 py-2 text-foreground hover:text-primary hover:bg-primary/5 rounded-md transition-colors">Athlete Dashboard</Link>
+                  <Link to="/coach" className="px-3 py-2 text-foreground hover:text-primary hover:bg-primary/5 rounded-md transition-colors">Coach Portal</Link>
+                  <Link to="/admin" className="px-3 py-2 text-foreground hover:text-primary hover:bg-primary/5 rounded-md transition-colors">Admin Panel</Link>
+                </>
+              )}
               {userRole === 'athlete' && (
                 <>
                   <a href="#dashboard" className="px-3 py-2 text-foreground hover:text-primary hover:bg-primary/5 rounded-md transition-colors">Dashboard</a>
