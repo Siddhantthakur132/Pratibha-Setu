@@ -1,35 +1,43 @@
-import { useState } from "react"
-import { Header } from "@/components/layout/Header"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/enhanced-button"
-import { AthleteCard } from "@/components/athlete/AthleteCard"
-import { Badge } from "@/components/ui/badge"
-import { Input } from "@/components/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { 
-  Users, 
-  MapPin, 
-  Filter, 
-  Search, 
-  TrendingUp, 
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Header } from "@/components/layout/Header";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/enhanced-button";
+import { AthleteCard } from "@/components/athlete/AthleteCard";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Users,
+  MapPin,
+  Filter,
+  Search,
+  TrendingUp,
   Flag,
   UserCheck,
   Clock,
-  BarChart3
-} from "lucide-react"
+  BarChart3,
+} from "lucide-react";
 
 export default function CoachDashboard() {
-  const [searchTerm, setSearchTerm] = useState("")
-  const [selectedRegion, setSelectedRegion] = useState("all")
-  const [selectedSport, setSelectedSport] = useState("all")
+  const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedRegion, setSelectedRegion] = useState("all");
+  const [selectedSport, setSelectedSport] = useState("all");
 
   // Mock data
   const statsData = {
     totalAthletes: 156,
     newThisWeek: 12,
     needsReview: 8,
-    topTalent: 23
-  }
+    topTalent: 23,
+  };
 
   const athletesData = [
     {
@@ -41,10 +49,10 @@ export default function CoachDashboard() {
       sport: "Cricket",
       lastActive: "2 hours ago",
       hasCheatFlag: false,
-      badges: ["Fast Bowler", "Consistent", "Team Leader"]
+      badges: ["Fast Bowler", "Consistent", "Team Leader"],
     },
     {
-      id: "2", 
+      id: "2",
       name: "Sneha Reddy",
       age: 16,
       location: "Telangana",
@@ -52,18 +60,18 @@ export default function CoachDashboard() {
       sport: "Badminton",
       lastActive: "1 day ago",
       hasCheatFlag: true,
-      badges: ["Quick Reflexes", "Endurance", "Perfect Technique"]
+      badges: ["Quick Reflexes", "Endurance", "Perfect Technique"],
     },
     {
       id: "3",
       name: "Rohit Singh",
       age: 18,
-      location: "Punjab", 
+      location: "Punjab",
       talentScore: 82,
       sport: "Football",
       lastActive: "3 hours ago",
       hasCheatFlag: false,
-      badges: ["Goal Scorer", "Sprint Speed", "Field Vision"]
+      badges: ["Goal Scorer", "Sprint Speed", "Field Vision"],
     },
     {
       id: "4",
@@ -72,25 +80,27 @@ export default function CoachDashboard() {
       location: "Kerala",
       talentScore: 78,
       sport: "Athletics",
-      lastActive: "5 hours ago", 
+      lastActive: "5 hours ago",
       hasCheatFlag: false,
-      badges: ["Sprinter", "Dedication", "Rising Star"]
-    }
-  ]
+      badges: ["Sprinter", "Dedication", "Rising Star"],
+    },
+  ];
 
-  const filteredAthletes = athletesData.filter(athlete => {
-    const matchesSearch = athlete.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         athlete.location.toLowerCase().includes(searchTerm.toLowerCase())
-    const matchesRegion = selectedRegion === "all" || athlete.location.includes(selectedRegion)
-    const matchesSport = selectedSport === "all" || athlete.sport === selectedSport
-    
-    return matchesSearch && matchesRegion && matchesSport
-  })
+  const filteredAthletes = athletesData.filter((athlete) => {
+    const matchesSearch =
+      athlete.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      athlete.location.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesRegion =
+      selectedRegion === "all" || athlete.location.includes(selectedRegion);
+    const matchesSport = selectedSport === "all" || athlete.sport === selectedSport;
+
+    return matchesSearch && matchesRegion && matchesSport;
+  });
 
   return (
     <div className="min-h-screen bg-background">
       <Header userRole="coach" />
-      
+
       <main className="container mx-auto px-4 py-6">
         {/* Welcome Section */}
         <div className="mb-8">
@@ -111,7 +121,9 @@ export default function CoachDashboard() {
                   <Users className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-foreground">{statsData.totalAthletes}</p>
+                  <p className="text-2xl font-bold text-foreground">
+                    {statsData.totalAthletes}
+                  </p>
                   <p className="text-sm text-muted-foreground">Total Athletes</p>
                 </div>
               </div>
@@ -125,7 +137,9 @@ export default function CoachDashboard() {
                   <TrendingUp className="h-6 w-6 text-success" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-foreground">{statsData.newThisWeek}</p>
+                  <p className="text-2xl font-bold text-foreground">
+                    {statsData.newThisWeek}
+                  </p>
                   <p className="text-sm text-muted-foreground">New This Week</p>
                 </div>
               </div>
@@ -139,7 +153,9 @@ export default function CoachDashboard() {
                   <Flag className="h-6 w-6 text-accent" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-foreground">{statsData.needsReview}</p>
+                  <p className="text-2xl font-bold text-foreground">
+                    {statsData.needsReview}
+                  </p>
                   <p className="text-sm text-muted-foreground">Needs Review</p>
                 </div>
               </div>
@@ -153,8 +169,12 @@ export default function CoachDashboard() {
                   <UserCheck className="h-6 w-6 text-badge-gold" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-foreground">{statsData.topTalent}</p>
-                  <p className="text-sm text-muted-foreground">Top Talent (80+)</p>
+                  <p className="text-2xl font-bold text-foreground">
+                    {statsData.topTalent}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    Top Talent (80+)
+                  </p>
                 </div>
               </div>
             </CardContent>
@@ -180,7 +200,7 @@ export default function CoachDashboard() {
                   className="pl-10"
                 />
               </div>
-              
+
               <Select value={selectedRegion} onValueChange={setSelectedRegion}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select Region" />
@@ -212,11 +232,18 @@ export default function CoachDashboard() {
               </Select>
 
               <div className="flex space-x-2">
-                <Button variant="hero" className="flex-1">
+                <Button
+                  variant="hero"
+                  className="flex-1"
+                  onClick={() => navigate("/coach/heatmap")}
+                >
                   <MapPin className="h-4 w-4 mr-2" />
                   Talent Map
                 </Button>
-                <Button variant="outline">
+                <Button 
+                  variant="outline"
+                  onClick={() => navigate("/coach/analytics")}
+                >
                   <BarChart3 className="h-4 w-4 mr-2" />
                   Analytics
                 </Button>
@@ -232,13 +259,24 @@ export default function CoachDashboard() {
               Athletes ({filteredAthletes.length} found)
             </h2>
             <div className="flex items-center space-x-2">
-              <Badge variant="outline" className="bg-accent/10 text-accent border-accent/20">
+              <Badge
+                variant="outline"
+                className="bg-accent/10 text-accent border-accent/20"
+              >
                 <Flag className="h-3 w-3 mr-1" />
-                {athletesData.filter(a => a.hasCheatFlag).length} need review
+                {athletesData.filter((a) => a.hasCheatFlag).length} need
+                review
               </Badge>
-              <Badge variant="outline" className="bg-success/10 text-success border-success/20">
+              <Badge
+                variant="outline"
+                className="bg-success/10 text-success border-success/20"
+              >
                 <Clock className="h-3 w-3 mr-1" />
-                {athletesData.filter(a => a.lastActive.includes('hour')).length} active today
+                {
+                  athletesData.filter((a) => a.lastActive.includes("hour"))
+                    .length
+                }{" "}
+                active today
               </Badge>
             </div>
           </div>
@@ -249,8 +287,8 @@ export default function CoachDashboard() {
                 key={athlete.id}
                 athlete={athlete}
                 viewMode="coach"
-                onView={(id) => console.log('View athlete:', id)}
-                onCompare={(id) => console.log('Compare athlete:', id)}
+                onView={(id) => navigate(`/coach/athlete/${id}`)}
+                onCompare={(id) => navigate(`/coach/comparison?athlete=${id}`)}
               />
             ))}
           </div>
@@ -260,7 +298,9 @@ export default function CoachDashboard() {
               <div className="w-20 h-20 bg-muted/50 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Users className="h-10 w-10 text-muted-foreground" />
               </div>
-              <h3 className="text-lg font-medium text-foreground mb-2">No athletes found</h3>
+              <h3 className="text-lg font-medium text-foreground mb-2">
+                No athletes found
+              </h3>
               <p className="text-muted-foreground">
                 Try adjusting your search filters to find more athletes.
               </p>
@@ -270,7 +310,10 @@ export default function CoachDashboard() {
 
         {/* Quick Actions */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <Card className="card-hover cursor-pointer">
+          <Card
+            className="card-hover cursor-pointer"
+            onClick={() => navigate("/coach/heatmap")}
+          >
             <CardContent className="p-6 text-center">
               <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <MapPin className="h-6 w-6 text-primary" />
@@ -279,13 +322,16 @@ export default function CoachDashboard() {
               <p className="text-sm text-muted-foreground mb-4">
                 Interactive map showing talent density by location
               </p>
-              <Button variant="hero" size="sm" className="w-full">
+              <Button variant="hero" size="sm" className="w-full pointer-events-none">
                 View Map
               </Button>
             </CardContent>
           </Card>
 
-          <Card className="card-hover cursor-pointer">
+          <Card
+            className="card-hover cursor-pointer"
+            onClick={() => navigate("/coach/comparison")}
+          >
             <CardContent className="p-6 text-center">
               <div className="w-12 h-12 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <BarChart3 className="h-6 w-6 text-success" />
@@ -294,13 +340,16 @@ export default function CoachDashboard() {
               <p className="text-sm text-muted-foreground mb-4">
                 Side-by-side athlete comparison based on AI metrics
               </p>
-              <Button variant="success" size="sm" className="w-full">
+              <Button variant="success" size="sm" className="w-full pointer-events-none">
                 Compare
               </Button>
             </CardContent>
           </Card>
 
-          <Card className="card-hover cursor-pointer">
+          <Card
+            className="card-hover cursor-pointer"
+            onClick={() => navigate("/coach/review-queue")}
+          >
             <CardContent className="p-6 text-center">
               <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Flag className="h-6 w-6 text-accent" />
@@ -309,7 +358,7 @@ export default function CoachDashboard() {
               <p className="text-sm text-muted-foreground mb-4">
                 Athletes flagged by AI that need manual review
               </p>
-              <Button variant="warning" size="sm" className="w-full">
+              <Button variant="warning" size="sm" className="w-full pointer-events-none">
                 Review ({statsData.needsReview})
               </Button>
             </CardContent>
@@ -317,5 +366,6 @@ export default function CoachDashboard() {
         </div>
       </main>
     </div>
-  )
+  );
 }
+

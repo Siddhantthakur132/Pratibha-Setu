@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom";
 import { Header } from "@/components/layout/Header"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/enhanced-button"
@@ -19,6 +20,7 @@ import {
 } from "lucide-react"
 
 export default function AthleteDashboard() {
+  const navigate = useNavigate();
   const [offlineSync, setOfflineSync] = useState(true)
   
   // Mock athlete data
@@ -175,7 +177,10 @@ export default function AthleteDashboard() {
 
         {/* Quick Actions */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          <Card className="card-hover cursor-pointer">
+          <Card 
+            className="card-hover cursor-pointer"
+            onClick={() => navigate('/athlete/fitness-tests')}
+          >
             <CardContent className="p-6 text-center">
               <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Video className="h-6 w-6 text-primary" />
@@ -184,13 +189,16 @@ export default function AthleteDashboard() {
               <p className="text-sm text-muted-foreground mb-4">
                 Record sprint, jumps & agility with AI analysis
               </p>
-              <Button variant="hero" size="sm" className="w-full">
+              <Button variant="hero" size="sm" className="w-full pointer-events-none">
                 Start Test
               </Button>
             </CardContent>
           </Card>
 
-          <Card className="card-hover cursor-pointer">
+          <Card 
+            className="card-hover cursor-pointer"
+            onClick={() => navigate('/athlete/cognitive-games')}
+          >
             <CardContent className="p-6 text-center">
               <div className="w-12 h-12 bg-ai-processing/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Brain className="h-6 w-6 text-ai-processing" />
@@ -199,13 +207,16 @@ export default function AthleteDashboard() {
               <p className="text-sm text-muted-foreground mb-4">
                 Voice-guided reflex & decision tests
               </p>
-              <Button variant="ai" size="sm" className="w-full">
+              <Button variant="ai" size="sm" className="w-full pointer-events-none">
                 Play Now
               </Button>
             </CardContent>
           </Card>
 
-          <Card className="card-hover cursor-pointer">
+          <Card 
+            className="card-hover cursor-pointer"
+            onClick={() => navigate('/athlete/training-plan')}
+          >
             <CardContent className="p-6 text-center">
               <div className="w-12 h-12 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Timer className="h-6 w-6 text-success" />
@@ -214,7 +225,7 @@ export default function AthleteDashboard() {
               <p className="text-sm text-muted-foreground mb-4">
                 AI-personalized nutrition & training tips
               </p>
-              <Button variant="success" size="sm" className="w-full">
+              <Button variant="success" size="sm" className="w-full pointer-events-none">
                 View Plan
               </Button>
             </CardContent>
@@ -275,3 +286,4 @@ export default function AthleteDashboard() {
     </div>
   )
 }
+

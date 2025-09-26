@@ -1,26 +1,22 @@
-import { useState } from "react"
-import { Header } from "@/components/layout/Header"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/enhanced-button"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
+import { useNavigate } from "react-router-dom";
+import { Header } from "@/components/layout/Header";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/enhanced-button";
+import { Progress } from "@/components/ui/progress";
 import { 
   Users, 
   Activity, 
   Settings, 
   BarChart3, 
-  Shield, 
   Globe,
   Server,
   AlertTriangle,
-  CheckCircle,
-  Clock,
-  Database,
-  Cpu,
-  Wifi
-} from "lucide-react"
+  Cpu
+} from "lucide-react";
 
 export default function AdminDashboard() {
+  const navigate = useNavigate();
+
   // Mock admin data
   const systemStats = {
     totalUsers: 2847,
@@ -31,14 +27,14 @@ export default function AdminDashboard() {
     storageUsed: 67,
     apiRequests: 89234,
     errorRate: 0.3
-  }
+  };
 
   const recentAlerts = [
     { id: 1, type: 'warning', message: 'High API usage detected in Mumbai region', time: '2 hours ago' },
     { id: 2, type: 'success', message: 'AI model updated successfully', time: '4 hours ago' },
     { id: 3, type: 'info', message: 'New coach registrations: 15 pending approval', time: '6 hours ago' },
     { id: 4, type: 'error', message: 'Sync failed for 3 athletes in Kerala', time: '8 hours ago' }
-  ]
+  ];
 
   const regionStats = [
     { region: 'Maharashtra', users: 456, growth: 12 },
@@ -46,7 +42,7 @@ export default function AdminDashboard() {
     { region: 'Tamil Nadu', users: 367, growth: 15 },
     { region: 'Gujarat', users: 298, growth: 6 },
     { region: 'Punjab', users: 234, growth: 18 }
-  ]
+  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -214,7 +210,10 @@ export default function AdminDashboard() {
 
         {/* Quick Actions */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <Card className="card-hover cursor-pointer">
+          <Card 
+            className="card-hover cursor-pointer"
+            onClick={() => navigate('/admin/user-management')}
+          >
             <CardContent className="p-6 text-center">
               <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Users className="h-6 w-6 text-primary" />
@@ -223,13 +222,16 @@ export default function AdminDashboard() {
               <p className="text-sm text-muted-foreground mb-4">
                 Manage athletes, coaches, and admin roles
               </p>
-              <Button variant="hero" size="sm" className="w-full">
+              <Button variant="hero" size="sm" className="w-full pointer-events-none">
                 Manage Users
               </Button>
             </CardContent>
           </Card>
 
-          <Card className="card-hover cursor-pointer">
+          <Card 
+            className="card-hover cursor-pointer"
+            onClick={() => navigate('/admin/ai-config')}
+          >
             <CardContent className="p-6 text-center">
               <div className="w-12 h-12 bg-ai-processing/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Cpu className="h-6 w-6 text-ai-processing" />
@@ -238,13 +240,16 @@ export default function AdminDashboard() {
               <p className="text-sm text-muted-foreground mb-4">
                 Adjust AI model parameters and thresholds
               </p>
-              <Button variant="ai" size="sm" className="w-full">
+              <Button variant="ai" size="sm" className="w-full pointer-events-none">
                 Configure AI
               </Button>
             </CardContent>
           </Card>
 
-          <Card className="card-hover cursor-pointer">
+          <Card 
+            className="card-hover cursor-pointer"
+            onClick={() => navigate('/admin/analytics')}
+          >
             <CardContent className="p-6 text-center">
               <div className="w-12 h-12 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <BarChart3 className="h-6 w-6 text-success" />
@@ -253,13 +258,16 @@ export default function AdminDashboard() {
               <p className="text-sm text-muted-foreground mb-4">
                 Detailed system and user analytics
               </p>
-              <Button variant="success" size="sm" className="w-full">
+              <Button variant="success" size="sm" className="w-full pointer-events-none">
                 View Analytics
               </Button>
             </CardContent>
           </Card>
 
-          <Card className="card-hover cursor-pointer">
+          <Card 
+            className="card-hover cursor-pointer"
+            onClick={() => navigate('/admin/settings')}
+          >
             <CardContent className="p-6 text-center">
               <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Settings className="h-6 w-6 text-accent" />
@@ -268,7 +276,7 @@ export default function AdminDashboard() {
               <p className="text-sm text-muted-foreground mb-4">
                 Configure languages, regions, and features
               </p>
-              <Button variant="warning" size="sm" className="w-full">
+              <Button variant="warning" size="sm" className="w-full pointer-events-none">
                 Settings
               </Button>
             </CardContent>
@@ -278,3 +286,4 @@ export default function AdminDashboard() {
     </div>
   )
 }
+
