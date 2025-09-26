@@ -1,5 +1,6 @@
 {
   "name": "vite_react_shadcn_ts",
+  "homepage": "https://Siddhantthakur132.github.io/Pratibha-Setu",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,12 +10,10 @@
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
-  "predeploy": "npm run build",
-  "deploy": "gh-pages -d dist"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
-    "homepage": "[https://Siddhantthakur132.github.io/Pratibha-Setu](https://Siddhantthakur132.github.io/Pratibha-Setu)",
-
     "@hookform/resolvers": "^3.10.0",
     "@radix-ui/react-accordion": "^1.2.11",
     "@radix-ui/react-alert-dialog": "^1.1.14",
