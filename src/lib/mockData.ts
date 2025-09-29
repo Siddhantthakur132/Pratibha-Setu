@@ -84,7 +84,7 @@ export const mockAIConfig = [
     id: 'cheat_detection',
     title: 'Cheat Detection Algorithm',
     description: 'Flags unnatural movements, loops, or incomplete reps.',
-     settings: [
+      settings: [
       { id: 'anomaly_sensitivity', label: 'Anomaly Sensitivity', type: 'slider', value: 90, min: 60, max: 100 },
       { id: 'video_loop_detection', label: 'Video Loop Detection', type: 'switch', value: true },
     ],
@@ -153,7 +153,10 @@ export const mockComparisonAthletes = [
   { id: '4', name: 'Kavya Nair' },
 ];
 
-// Used in: /coach/athlete/:id (Athlete Profile Page)
+// *********************************************************************************
+// >> UPDATED SECTION <<
+// Used in: /coach/athlete/:id (Athlete Profile Page) & Comparison Tool
+// *********************************************************************************
 export const mockAthleteProfiles = [
   {
     id: "1",
@@ -164,21 +167,21 @@ export const mockAthleteProfiles = [
     talentScore: 89,
     badges: ["Fast Bowler", "Consistent", "Team Leader"],
     physical: {
-      height: "6'1\"",
-      weight: "75 kg",
-      wingspan: "188 cm",
+      sprint_100m: { value: 11.5, rank: "Top 10%" },
+      vertical_jump: { value: 81, rank: "Top 5%" }, // in cm
+      agility_run: { value: 4.8, rank: "Top 15%" },
     },
-    testResults: {
-      "100m_sprint": "11.5s",
-      vertical_jump: "32 inches",
-      sit_ups_1min: "55",
-      push_ups_1min: "45",
+    cognitive: {
+      reaction_time: { value: 180, rank: "Top 20%" }, // in ms
+      decision_making: { value: 92, rank: "Top 8%" },
     },
-    cognitiveScores: {
-      reaction_time: "180ms",
-      decision_making: "92%",
-      spatial_awareness: "88%",
-    },
+    chartData: [
+      { subject: 'Speed', A: 88, fullMark: 100 },
+      { subject: 'Power', A: 91, fullMark: 100 },
+      { subject: 'Agility', A: 85, fullMark: 100 },
+      { subject: 'Endurance', A: 82, fullMark: 100 },
+      { subject: 'Cognition', A: 92, fullMark: 100 },
+    ],
     performanceHistory: [
       { month: "Jan", tsi: 78 },
       { month: "Feb", tsi: 80 },
@@ -197,22 +200,22 @@ export const mockAthleteProfiles = [
     talentScore: 85,
     badges: ["Quick Reflexes", "Endurance", "Perfect Technique"],
     physical: {
-      height: "5'7\"",
-      weight: "58 kg",
-      wingspan: "170 cm",
+      sprint_100m: { value: 12.8, rank: "Top 30%" },
+      vertical_jump: { value: 71, rank: "Top 15%" },
+      agility_run: { value: 4.5, rank: "Top 8%" },
     },
-    testResults: {
-      agility_run: "8.2s",
-      vertical_jump: "28 inches",
-      sit_ups_1min: "60",
-      shuttle_run: "9.5s",
+    cognitive: {
+      reaction_time: { value: 150, rank: "Top 5%" },
+      decision_making: { value: 95, rank: "Top 3%" },
     },
-    cognitiveScores: {
-      reaction_time: "150ms",
-      decision_making: "95%",
-      spatial_awareness: "91%",
-    },
-     performanceHistory: [
+    chartData: [
+      { subject: 'Speed', A: 75, fullMark: 100 },
+      { subject: 'Power', A: 80, fullMark: 100 },
+      { subject: 'Agility', A: 94, fullMark: 100 },
+      { subject: 'Endurance', A: 88, fullMark: 100 },
+      { subject: 'Cognition', A: 97, fullMark: 100 },
+    ],
+    performanceHistory: [
       { month: "Jan", tsi: 75 },
       { month: "Feb", tsi: 76 },
       { month: "Mar", tsi: 79 },
@@ -229,23 +232,23 @@ export const mockAthleteProfiles = [
     sport: "Football",
     talentScore: 82,
     badges: ["Goal Scorer", "Sprint Speed", "Field Vision"],
-     physical: {
-      height: "5'11\"",
-      weight: "78 kg",
-      wingspan: "180 cm",
+    physical: {
+      sprint_100m: { value: 11.9, rank: "Top 18%" },
+      vertical_jump: { value: 76, rank: "Top 10%" },
+      agility_run: { value: 4.9, rank: "Top 20%" },
     },
-    testResults: {
-      "40m_sprint": "4.8s",
-      vertical_jump: "30 inches",
-      beep_test: "Level 11",
-      push_ups_1min: "50",
+    cognitive: {
+      reaction_time: { value: 190, rank: "Top 25%" },
+      decision_making: { value: 89, rank: "Top 15%" },
     },
-    cognitiveScores: {
-      reaction_time: "190ms",
-      decision_making: "89%",
-      spatial_awareness: "93%",
-    },
-     performanceHistory: [
+    chartData: [
+      { subject: 'Speed', A: 84, fullMark: 100 },
+      { subject: 'Power', A: 86, fullMark: 100 },
+      { subject: 'Agility', A: 81, fullMark: 100 },
+      { subject: 'Endurance', A: 90, fullMark: 100 },
+      { subject: 'Cognition', A: 89, fullMark: 100 },
+    ],
+    performanceHistory: [
       { month: "Jan", tsi: 72 },
       { month: "Feb", tsi: 75 },
       { month: "Mar", tsi: 77 },
@@ -254,7 +257,7 @@ export const mockAthleteProfiles = [
       { month: "Jun", tsi: 82 },
     ],
   },
-   {
+  {
     id: "4",
     name: "Kavya Nair",
     age: 15,
@@ -263,22 +266,22 @@ export const mockAthleteProfiles = [
     talentScore: 78,
     badges: ["Sprinter", "Dedication", "Rising Star"],
     physical: {
-      height: "5'5\"",
-      weight: "52 kg",
-      wingspan: "165 cm",
+      sprint_100m: { value: 12.1, rank: "Top 12%" },
+      vertical_jump: { value: 65, rank: "Top 25%" },
+      agility_run: { value: 5.1, rank: "Top 30%" },
     },
-    testResults: {
-      "100m_sprint": "12.1s",
-      long_jump: "5.2m",
-      sit_ups_1min: "58",
-      push_ups_1min: "40",
+    cognitive: {
+      reaction_time: { value: 175, rank: "Top 18%" },
+      decision_making: { value: 85, rank: "Top 20%" },
     },
-    cognitiveScores: {
-      reaction_time: "175ms",
-      decision_making: "85%",
-      spatial_awareness: "87%",
-    },
-     performanceHistory: [
+    chartData: [
+      { subject: 'Speed', A: 92, fullMark: 100 },
+      { subject: 'Power', A: 75, fullMark: 100 },
+      { subject: 'Agility', A: 78, fullMark: 100 },
+      { subject: 'Endurance', A: 70, fullMark: 100 },
+      { subject: 'Cognition', A: 85, fullMark: 100 },
+    ],
+    performanceHistory: [
       { month: "Jan", tsi: 68 },
       { month: "Feb", tsi: 70 },
       { month: "Mar", tsi: 72 },
@@ -343,7 +346,7 @@ export const mockFitnessTests = [
     status: 'ready',
     bestScore: '40 reps'
   },
-   {
+    {
     id: 'agility_ladder',
     title: 'Agility Ladder Drill',
     description: 'Assess your coordination, speed, and agility.',
@@ -407,4 +410,3 @@ export const mockTrainingPlan = {
     { day: 'Friday', workout: '5km Long Distance Run (Steady Pace)', nutrition: 'Light dinner, focus on vegetables.', status: 'upcoming' },
   ]
 };
-
