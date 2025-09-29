@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Pratibha Setu - Page Not Found</title>
+    <script type="text/javascript">
+      // Get the current path from the URL.
+      var path = window.location.pathname;
+
+      // If the path is from a sub-directory on GitHub Pages, remove the repo name.
+      var repoName = '/Pratibha-Setu';
+      if (path.startsWith(repoName)) {
+        path = path.substring(repoName.length);
+      }
+      
+      // Store the path in sessionStorage.
+      sessionStorage.redirect = path;
+
+      // Redirect to the root index.html file.
+      // The `.` is important here. It ensures the redirect is relative to the current directory.
+      window.location.replace('./');
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
