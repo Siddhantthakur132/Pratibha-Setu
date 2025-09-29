@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { Header } from "@/components/layout/Header";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/enhanced-button";
@@ -15,13 +15,13 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { 
-  User, 
-  MapPin, 
-  Calendar, 
-  BarChart, 
-  Zap, 
-  Brain, 
+import {
+  User,
+  MapPin,
+  Calendar,
+  BarChart,
+  Zap,
+  Brain,
   TrendingUp,
   Mail,
   FileText
@@ -45,6 +45,14 @@ const AthleteProfilePage = () => {
       </div>
     );
   }
+
+  // Helper to format units for display
+  const getUnit = (key: string) => {
+    if (key.includes('sprint') || key.includes('run')) return 's';
+    if (key.includes('jump')) return 'cm';
+    if (key.includes('time')) return 'ms';
+    return '';
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -107,51 +115,52 @@ const AthleteProfilePage = () => {
               </div>
             </CardContent>
           </Card>
-          
+
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2"><BarChart className="h-5 w-5" />Key Metrics</CardTitle>
+              <CardTitle className="flex items-center gap-2"><BarChart className="h-5 w-5" />Talent Score</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-4 flex flex-col justify-center h-full">
               <div>
                 <div className="flex justify-between items-center mb-1">
                   <span className="text-sm font-medium">Talent Score Index (TSI)</span>
-                  <span className="font-bold text-primary">{athlete.talentScore}</span>
+                  <span className="font-bold text-primary text-lg">{athlete.talentScore}</span>
                 </div>
                 <Progress value={athlete.talentScore} className="h-2" />
-              </div>
-               <div>
-                <p className="text-sm text-muted-foreground">Height: <span className="font-medium text-foreground">{athlete.physical.height}</span></p>
-                <p className="text-sm text-muted-foreground">Weight: <span className="font-medium text-foreground">{athlete.physical.weight}</span></p>
-                <p className="text-sm text-muted-foreground">Wingspan: <span className="font-medium text-foreground">{athlete.physical.wingspan}</span></p>
               </div>
             </CardContent>
           </Card>
 
           <Card>
              <CardHeader>
-              <CardTitle className="flex items-center gap-2"><Zap className="h-5 w-5" />Physical Test Results</CardTitle>
+              <CardTitle className="flex items-center gap-2"><Zap className="h-5 w-5" />Physical Metrics</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2">
-              {Object.entries(athlete.testResults).map(([key, value]) => (
-                 <div key={key} className="flex justify-between text-sm">
-                   <span className="text-muted-foreground capitalize">{key.replace(/_/g, ' ')}</span>
-                   <span className="font-semibold text-foreground">{value}</span>
-                 </div>
+              {Object.entries(athlete.physical || {}).map(([key, data]) => (
+                  <div key={key} className="flex justify-between items-center text-sm">
+                    <span className="text-muted-foreground capitalize">{key.replace(/_/g, ' ')}</span>
+                    <div className="flex items-baseline gap-2">
+                      <span className="font-semibold text-foreground">{data.value}{getUnit(key)}</span>
+                      <Badge variant="outline" className="text-xs">{data.rank}</Badge>
+                    </div>
+                  </div>
               ))}
             </CardContent>
           </Card>
 
           <Card>
              <CardHeader>
-              <CardTitle className="flex items-center gap-2"><Brain className="h-5 w-5" />Cognitive Scores</CardTitle>
+              <CardTitle className="flex items-center gap-2"><Brain className="h-5 w-5" />Cognitive Metrics</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2">
-               {Object.entries(athlete.cognitiveScores).map(([key, value]) => (
-                 <div key={key} className="flex justify-between text-sm">
-                   <span className="text-muted-foreground capitalize">{key.replace(/_/g, ' ')}</span>
-                   <span className="font-semibold text-foreground">{value}</span>
-                 </div>
+               {Object.entries(athlete.cognitive || {}).map(([key, data]) => (
+                  <div key={key} className="flex justify-between items-center text-sm">
+                    <span className="text-muted-foreground capitalize">{key.replace(/_/g, ' ')}</span>
+                    <div className="flex items-baseline gap-2">
+                      <span className="font-semibold text-foreground">{data.value}{getUnit(key)}</span>
+                      <Badge variant="outline" className="text-xs">{data.rank}</Badge>
+                    </div>
+                  </div>
               ))}
             </CardContent>
           </Card>
@@ -162,4 +171,3 @@ const AthleteProfilePage = () => {
 };
 
 export default AthleteProfilePage;
-
